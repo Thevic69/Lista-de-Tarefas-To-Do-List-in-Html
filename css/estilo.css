@@ -1,0 +1,397 @@
+/* =========================================================
+   VARIÁVEIS DE COR (TEMA CLARO E ESCURO AUTOMÁTICOS)
+   ========================================================= */
+:root {
+    --cor-fundo: #f3f4f8;
+    --cor-superficie: #ffffff;
+    --cor-superficie-suave: #f6f7fb;
+    --cor-filtro-ativo: #ffffff;
+    --cor-borda: #e4e6ee;
+    --cor-texto-principal: #1b1d2a;
+    --cor-texto-secundario: #6a6f85;
+    --cor-destaque: #5b5bd6;
+    --cor-destaque-escura: #4a4ac0;
+    --cor-texto-sobre-destaque: #ffffff;
+    --cor-erro: #d93a3a;
+    --cor-perigo-suave: rgba(217, 58, 58, 0.1);
+
+    --sombra-cartao: 0 12px 40px rgba(27, 29, 42, 0.08);
+    --raio-borda-grande: 20px;
+    --raio-borda-media: 12px;
+    --transicao-padrao: 0.18s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cor-fundo: #0f1017;
+        --cor-superficie: #181a25;
+        --cor-superficie-suave: #1f2230;
+        --cor-filtro-ativo: #313550;
+        --cor-borda: #2a2d3e;
+        --cor-texto-principal: #eceef7;
+        --cor-texto-secundario: #8f94ab;
+        --cor-destaque: #8585f5;
+        --cor-destaque-escura: #7070e6;
+        --cor-texto-sobre-destaque: #0f1017;
+        --cor-erro: #ff6b6b;
+        --cor-perigo-suave: rgba(255, 107, 107, 0.12);
+
+        --sombra-cartao: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* =========================================================
+   RESET E BASE
+   ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 56px 20px;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+button,
+input {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* =========================================================
+   CARTÃO PRINCIPAL
+   ========================================================= */
+.aplicativo {
+    width: 100%;
+    max-width: 520px;
+    padding: 32px;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda-grande);
+    box-shadow: var(--sombra-cartao);
+}
+
+.cabecalho {
+    margin-bottom: 24px;
+}
+
+.cabecalho-titulo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.cabecalho-resumo {
+    margin-top: 2px;
+    font-size: 0.92rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* =========================================================
+   FORMULÁRIO DE NOVA TAREFA
+   ========================================================= */
+.formulario-rotulo {
+    /* Rótulo visualmente oculto, mas lido por leitores de tela */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.formulario-linha {
+    display: flex;
+    gap: 10px;
+}
+
+.formulario-campo {
+    flex: 1;
+    min-width: 0;
+    height: 46px;
+    padding: 0 14px;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-superficie-suave);
+    border: 1.5px solid var(--cor-borda);
+    border-radius: var(--raio-borda-media);
+    transition: border-color var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
+.formulario-campo::placeholder {
+    color: var(--cor-texto-secundario);
+}
+
+.formulario-campo:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(91, 91, 214, 0.2);
+}
+
+.formulario-campo.campo-invalido {
+    border-color: var(--cor-erro);
+    box-shadow: 0 0 0 3px var(--cor-perigo-suave);
+}
+
+.botao-adicionar {
+    height: 46px;
+    padding: 0 20px;
+    font-weight: 600;
+    color: var(--cor-texto-sobre-destaque);
+    background-color: var(--cor-destaque);
+    border: none;
+    border-radius: var(--raio-borda-media);
+    cursor: pointer;
+    transition: background-color var(--transicao-padrao), transform var(--transicao-padrao);
+}
+
+.botao-adicionar:hover {
+    background-color: var(--cor-destaque-escura);
+}
+
+.botao-adicionar:active {
+    transform: scale(0.97);
+}
+
+.mensagem-de-erro {
+    /* Altura reservada para que o layout não "pule" quando a mensagem aparece */
+    min-height: 1.4rem;
+    margin-top: 8px;
+    font-size: 0.86rem;
+    color: var(--cor-erro);
+}
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+.filtros {
+    display: flex;
+    gap: 6px;
+    margin: 8px 0 20px;
+    padding: 4px;
+    background-color: var(--cor-superficie-suave);
+    border-radius: var(--raio-borda-media);
+}
+
+.filtro {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.filtro:hover {
+    color: var(--cor-texto-principal);
+}
+
+.filtro-ativo {
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-filtro-ativo);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filtro-contador {
+    min-width: 22px;
+    padding: 1px 7px;
+    font-size: 0.76rem;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+    background-color: var(--cor-borda);
+    border-radius: 999px;
+}
+
+.filtro-ativo .filtro-contador {
+    color: var(--cor-texto-sobre-destaque);
+    background-color: var(--cor-destaque);
+}
+
+/* =========================================================
+   LISTA DE TAREFAS
+   ========================================================= */
+.lista-de-tarefas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tarefa {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px 4px 4px;
+    background-color: var(--cor-superficie-suave);
+    border: 1px solid transparent;
+    border-radius: var(--raio-borda-media);
+    transition: border-color var(--transicao-padrao);
+}
+
+.tarefa:hover {
+    border-color: var(--cor-borda);
+}
+
+.tarefa-nova {
+    animation: tarefa-entrando 0.2s ease;
+}
+
+@keyframes tarefa-entrando {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tarefa-conteudo {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 8px;
+    cursor: pointer;
+}
+
+/* Caixa de seleção nativa oculta visualmente; o marcador abaixo faz o papel visual */
+.tarefa-caixa {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.tarefa-marcador {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    border: 2px solid var(--cor-texto-secundario);
+    border-radius: 50%;
+    transition: background-color var(--transicao-padrao), border-color var(--transicao-padrao), color var(--transicao-padrao);
+}
+
+.tarefa-marcador::after {
+    content: "";
+    width: 5px;
+    height: 10px;
+    margin-bottom: 2px;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.tarefa-caixa:checked + .tarefa-marcador {
+    color: var(--cor-texto-sobre-destaque);
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+}
+
+.tarefa-caixa:focus-visible + .tarefa-marcador {
+    outline: 3px solid rgba(91, 91, 214, 0.45);
+    outline-offset: 2px;
+}
+
+.tarefa-texto {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    transition: color var(--transicao-padrao);
+}
+
+.tarefa-concluida .tarefa-texto {
+    color: var(--cor-texto-secundario);
+    text-decoration: line-through;
+}
+
+.tarefa-remover {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cor-texto-secundario);
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: color var(--transicao-padrao), background-color var(--transicao-padrao);
+}
+
+.tarefa-remover svg {
+    width: 18px;
+    height: 18px;
+}
+
+.tarefa-remover:hover,
+.tarefa-remover:focus-visible {
+    color: var(--cor-erro);
+    background-color: var(--cor-perigo-suave);
+    outline: none;
+}
+
+/* =========================================================
+   MENSAGEM DE LISTA VAZIA
+   ========================================================= */
+.lista-vazia {
+    padding: 28px 0 8px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--cor-texto-secundario);
+}
+
+.lista-vazia:empty {
+    display: none;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 480px) {
+    body {
+        padding: 24px 12px;
+    }
+
+    .aplicativo {
+        padding: 22px 18px;
+    }
+
+    .botao-adicionar {
+        padding: 0 16px;
+    }
+
+    .filtro {
+        font-size: 0.82rem;
+        padding: 9px 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tarefa-nova {
+        animation: none;
+    }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+    <main class="aplicativo">
+
+        <header class="cabecalho">
+            <h1 class="cabecalho-titulo">Minhas Tarefas</h1>
+            <p class="cabecalho-resumo" id="resumo-de-tarefas">Nenhuma tarefa pendente</p>
+        </header>
+
+        <!-- Formulário para adicionar tarefas -->
+        <form class="formulario" id="formulario-de-tarefa" novalidate>
+            <label class="formulario-rotulo" for="campo-de-tarefa">Nova tarefa</label>
+            <div class="formulario-linha">
+                <input
+                    type="text"
+                    id="campo-de-tarefa"
+                    class="formulario-campo"
+                    placeholder="Escreva uma tarefa"
+                    maxlength="120"
+                    autocomplete="off"
+                    aria-describedby="mensagem-de-erro"
+                >
+                <button type="submit" class="botao-adicionar">Adicionar</button>
+            </div>
+            <p class="mensagem-de-erro" id="mensagem-de-erro" role="alert"></p>
+        </form>
+
+        <!-- Filtros de visualização -->
+        <div class="filtros" id="filtros-de-tarefas" role="group" aria-label="Filtrar tarefas">
+            <button type="button" class="filtro filtro-ativo" data-filtro="todas" aria-pressed="true">
+                Todas <span class="filtro-contador" data-contador="todas">0</span>
+            </button>
+            <button type="button" class="filtro" data-filtro="pendentes" aria-pressed="false">
+                Pendentes <span class="filtro-contador" data-contador="pendentes">0</span>
+            </button>
+            <button type="button" class="filtro" data-filtro="concluidas" aria-pressed="false">
+                Concluídas <span class="filtro-contador" data-contador="concluidas">0</span>
+            </button>
+        </div>
+
+        <!-- Lista de tarefas (preenchida pelo JavaScript) -->
+        <ul class="lista-de-tarefas" id="lista-de-tarefas"></ul>
+
+        <p class="lista-vazia" id="mensagem-de-lista-vazia"></p>
+
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
